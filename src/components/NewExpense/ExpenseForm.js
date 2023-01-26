@@ -19,11 +19,6 @@ const ExpenseForm = (props) => {
         inputTitle: e.target.value,
       };
     });
-
-    // setUserInput({
-    //   ...userInput,
-    //   inputTitle: e.target.value,
-    // });
   };
 
   const amountChangeHandler = (e) => {
@@ -45,6 +40,7 @@ const ExpenseForm = (props) => {
   };
 
   const submitHandler = (e) => {
+    e.preventDefault();
     const expenseData = {
       title: userInput.inputTitle,
       amount: userInput.inputAmount,
@@ -54,7 +50,6 @@ const ExpenseForm = (props) => {
     setUserInput(() => {
       return { inputTitle: "", inputAmount: "", inputDate: "" };
     });
-    e.preventDefault();
   };
 
   return (

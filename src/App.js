@@ -34,8 +34,6 @@ function App() {
 
   const addExpenseHandler = (expense) => {
     expenses.push(expense);
-    console.log(expense);
-    console.log(expenses);
   };
 
   return (

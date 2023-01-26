@@ -11,10 +11,6 @@ function ExpenseItem(props) {
     setTitle("Updated!");
   };
 
-  const mouseOverHandler = () => {
-    setTitle("EYOOOU");
-  };
-
   function getRandomDate() {
     const maxDate = Date.now();
     const timestamp = Math.floor(Math.random() * maxDate);
@@ -29,7 +25,7 @@ function ExpenseItem(props) {
       <ExpenseDate date={date} />
       <button onClick={randomDateHandler}>Random Date</button>
       <div className="expense-item__description">
-        <h2 onMouseOver={mouseOverHandler}>{title}</h2>
+        <h2>{title}</h2>
         <div className="expense-item__price">{props.amount}€</div>
         <button onClick={clickHandler}>Change Title</button>
       </div>
