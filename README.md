@@ -1,5 +1,5 @@
-#Proyecto React 01
-Proyecto básico para empezar las bases de react 
+# Proyecto React 01
+Proyecto básico para empezar las bases de react.
 
 ## Lo que he aprendido
 -Componentes (props, eventos,...)
