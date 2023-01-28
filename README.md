@@ -1,9 +1,9 @@
-# Proyecto React 01
-Proyecto básico para empezar las bases de react.
+# React Project 01
+Basic project to start the react bases.
 
-## Lo que he aprendido
--Componentes (props, eventos,...)
--Pasar información por props entre componentes
--States
--Conditional content
--Styling basico 
+## What I learnt
+- Components (props, events, jsx,...)
+- Methods to pass information between components
+- States
+- Conditional content
+- Basic styling
