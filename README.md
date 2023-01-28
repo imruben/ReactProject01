@@ -1,5 +1,5 @@
 # React Project 01
-Basic project to start the react bases.
+Basic project to start learning the react bases.
 
 ## What I learnt
 - Components (props, events, jsx,...)
