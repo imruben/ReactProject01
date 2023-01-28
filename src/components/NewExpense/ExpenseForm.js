@@ -2,15 +2,19 @@ import "./ExpenseForm.css";
 import React, { useState } from "react";
 
 const ExpenseForm = (props) => {
-  // const [inputTitle, setInputTitle] = useState("");
-  // const [inputAmount, setInputAmount] = useState("");
-  // const [inputDate, setInputDate] = useState("");
+  const month = new Date().toLocaleString("es-ES", { month: "2-digit" });
+  const day = new Date().toLocaleString("es-ES", { day: "2-digit" });
+  const year = new Date().getFullYear();
+
+  let actualDate = `${year}-${month}-${day}`;
+  console.log(actualDate);
 
   const [userInput, setUserInput] = useState({
     inputTitle: "",
     inputAmount: "",
-    inputDate: "",
+    inputDate: actualDate,
   });
+  console.log(userInput.inputDate);
 
   const titleChangeHandler = (e) => {
     setUserInput((prevState) => {
@@ -20,7 +24,6 @@ const ExpenseForm = (props) => {
       };
     });
   };
-
   const amountChangeHandler = (e) => {
     setUserInput((prevState) => {
       return {
@@ -29,8 +32,8 @@ const ExpenseForm = (props) => {
       };
     });
   };
-
   const dateChangeHandler = (e) => {
+    console.log(e.target.value);
     setUserInput((prevState) => {
       return {
         ...prevState,
@@ -38,18 +41,18 @@ const ExpenseForm = (props) => {
       };
     });
   };
-
   const submitHandler = (e) => {
     e.preventDefault();
     const expenseData = {
       title: userInput.inputTitle,
-      amount: userInput.inputAmount,
+      amount: +userInput.inputAmount,
       date: new Date(userInput.inputDate),
     };
     props.onSaveExpenseData(expenseData);
     setUserInput(() => {
       return { inputTitle: "", inputAmount: "", inputDate: "" };
     });
+    props.hideForm();
   };
 
   return (
@@ -61,6 +64,7 @@ const ExpenseForm = (props) => {
             type="text"
             onChange={titleChangeHandler}
             value={userInput.inputTitle}
+            required
           />
         </div>
         <div className="new-expense__control">
@@ -71,20 +75,23 @@ const ExpenseForm = (props) => {
             step="0.01"
             onChange={amountChangeHandler}
             value={userInput.inputAmount}
+            required
           />
         </div>
         <div className="new-expense__control">
           <label>Date: {userInput.inputDate}</label>
           <input
             type="date"
-            min="2020-01-01"
+            min="2019-01-01"
             max="2023-01-24"
             onChange={dateChangeHandler}
             value={userInput.inputDate}
+            required
           />
         </div>
       </div>
       <div className="new-expense__actions">
+        <button onClick={props.hideForm}>Cancel Expense</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>

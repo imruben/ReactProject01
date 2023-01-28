@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm";
 
 const NewExpense = (props) => {
+  const [showFormInputs, setShowFormInputs] = useState(false);
+
   const saveExpenseDataHandler = (inputExpenseData) => {
     const expenseData = {
       ...inputExpenseData,
@@ -11,9 +13,24 @@ const NewExpense = (props) => {
     props.onAddExpense(expenseData);
   };
 
+  const showFormClickHandler = () => {
+    setShowFormInputs(true);
+  };
+  const hideFormClickHandler = () => {
+    setShowFormInputs(false);
+  };
+
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+      {showFormInputs && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          hideForm={hideFormClickHandler}
+        />
+      )}
+      {!showFormInputs && (
+        <button onClick={showFormClickHandler}>Add New Expense</button>
+      )}
     </div>
   );
 };

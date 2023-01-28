@@ -1,64 +1,37 @@
 import "./Expenses.css";
-import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
 import ExpensesFilter from "./ExpensesFilter";
 import React, { useState } from "react";
+import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpensesChart";
 
 function Expenses(props) {
-  //default year selected
-  const [filterYear, setFilterYear] = useState(2020);
-
-  const changeDefaultState = () => {
-    setFilterYear("All years");
-  };
-
+  //states filtro años
+  const [filterYear, setFilterYear] = useState("All years");
   const SaveFilterYearHandler = (inputFilterYear) => {
     setFilterYear(inputFilterYear);
-    setTimeout(changeDefaultState, 1000 * 3);
   };
+
+  //filtro por años
+  let expensesFilteredbyYear = props.items;
+  if (filterYear !== "All years")
+    expensesFilteredbyYear = props.items.filter(
+      (expense) => expense.date.getFullYear().toString() === filterYear
+    );
 
   return (
     <div>
-      <h2>{filterYear}</h2>
       <Card className="expenses">
+        <h2>{filterYear}</h2>
         <ExpensesFilter
           selected={filterYear}
           onSaveFilterYear={SaveFilterYearHandler}
         />
-        <ExpenseItem
-          title={props.items[0].title}
-          amount={props.items[0].amount}
-          date={props.items[0].date}
-        />
-        <ExpenseItem
-          title={props.items[1].title}
-          amount={props.items[1].amount}
-          date={props.items[1].date}
-        />
-        <ExpenseItem
-          title={props.items[2].title}
-          amount={props.items[2].amount}
-          date={props.items[2].date}
-        />
-        <ExpenseItem
-          title={props.items[3].title}
-          amount={props.items[3].amount}
-          date={props.items[3].date}
-        />
+        <ExpensesChart expenses={expensesFilteredbyYear} />
+        <ExpensesList items={expensesFilteredbyYear} />
       </Card>
     </div>
   );
 }
 
 export default Expenses;
-
-//a lo mejor para renderizar todos los del array expense??
-//   {props.items.forEach((expense) => {
-//     return (
-//       <ExpenseItem
-//         title={expense.title}
-//         amount={expense.amount}
-//         date={expense.date}
-//       />
-//     );
-//   })}
